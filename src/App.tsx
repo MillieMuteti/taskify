@@ -31,9 +31,7 @@ console.log(toDos);
      toDos={toDos}
      setToDos={setToDos}
       />
-      {/* { toDos.map((t) => (
-      <li>{t.toDo}</li>
-     ))} */}
+    
 
     </div>
   );
