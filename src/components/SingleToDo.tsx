@@ -16,15 +16,26 @@ const SingleToDo = ({toDos, setToDos, todo}: Props) => {
             todo.id === id ? {...todo , isDone : !todo.isDone} : todo
         )))
     }
+
+    const handleDelete =(id:number)=>{
+        setToDos(toDos.filter((todo)=>
+        todo.id !== id 
+        
+        ))
+    }
   return (
     <form className='todos__single'>
-        <span className='todos__single--text'>
-            {todo.toDo}
-
-        </span>
+        {todo.isDone? (
+            <s className='todos__single--text'>{todo.toDo} </s>
+        ): (
+            <span className='todos__single--text'>{todo.toDo} </span>  
+        )}
+        
         <div>
             <span className='icon'>
-            <AiFillDelete />
+            <AiFillDelete
+            onClick={()=> handleDelete(todo.id)}
+            />
             </span>
             <span className='icon'>
                 <AiFillEdit />
