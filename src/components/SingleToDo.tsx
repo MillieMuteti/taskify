@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { Todo } from './model';
 import {AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { MdOutlineDone } from 'react-icons/md';
@@ -11,6 +11,10 @@ type Props ={
 }
 
 const SingleToDo = ({toDos, setToDos, todo}: Props) => {
+
+    const[edit, setEdit] = useState<boolean>(false);
+    const [editToDo, setEditToDo] =useState<string>(todo.toDo)
+
     const handleDone= (id:number)=>{
         setToDos(toDos.map((todo)=>(
             todo.id === id ? {...todo , isDone : !todo.isDone} : todo
@@ -23,23 +27,50 @@ const SingleToDo = ({toDos, setToDos, todo}: Props) => {
         
         ))
     }
+    const handleEdit =(e:React.FormEvent, id:number) => {
+        e.preventDefault();
+        setToDos(toDos.map((todo) => (
+            todo.id === id ? { ...todo, toDo: editToDo } : todo
+        )))
+
+    }
+
+ 
+
   return (
-    <form className='todos__single'>
-        {todo.isDone? (
+    <form className='todos__single' onSubmit={(e)=> handleEdit(e, todo.id)}>
+    { edit ? (
+        <input
+        value={editToDo}
+        className='todos__single--text'
+        onChange={(e) => setEditToDo(e.target.value)} />
+    ) : (
+        todo.isDone? (
             <s className='todos__single--text'>{todo.toDo} </s>
         ): (
             <span className='todos__single--text'>{todo.toDo} </span>  
-        )}
+        )
+    )}
+    
+        
         
         <div>
+        <span className='icon'
+        onClick={()=>{
+            if(!edit && !todo.isDone){
+                setEdit(!edit)
+            }
+            
+        }}
+        >
+                <AiFillEdit />
+            </span>
             <span className='icon'>
             <AiFillDelete
             onClick={()=> handleDelete(todo.id)}
             />
             </span>
-            <span className='icon'>
-                <AiFillEdit />
-            </span>
+           
             <span className='icon'>
                 <MdOutlineDone
                 onClick={()=> handleDone(todo.id)}
