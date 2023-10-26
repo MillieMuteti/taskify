@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useRef, useEffect} from 'react'
 import { Todo } from './model';
 import {AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { MdOutlineDone } from 'react-icons/md';
@@ -31,9 +31,18 @@ const SingleToDo = ({toDos, setToDos, todo}: Props) => {
         e.preventDefault();
         setToDos(toDos.map((todo) => (
             todo.id === id ? { ...todo, toDo: editToDo } : todo
-        )))
+        )));
+        setEdit(false);
 
     }
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+    inputRef.current?.focus();
+    
+    }, [edit])
+    
+    
 
  
 
@@ -42,6 +51,7 @@ const SingleToDo = ({toDos, setToDos, todo}: Props) => {
     { edit ? (
         <input
         value={editToDo}
+        ref={inputRef}
         className='todos__single--text'
         onChange={(e) => setEditToDo(e.target.value)} />
     ) : (
