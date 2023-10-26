@@ -8,9 +8,10 @@ type Props ={
     todo:Todo,
     toDos: Todo[];
     setToDos: React.Dispatch<React.SetStateAction<Todo[]>>;
+    index:number;
 }
 
-const SingleToDo = ({toDos, setToDos, todo}: Props) => {
+const SingleToDo = ({toDos, setToDos, todo, index}: Props) => {
 
     const[edit, setEdit] = useState<boolean>(false);
     const [editToDo, setEditToDo] =useState<string>(todo.toDo)

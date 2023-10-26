@@ -11,54 +11,55 @@ interface Props{
     setCompletedToDos: React.Dispatch<React.SetStateAction<Todo[]>>
 }
 
-const ToDoList: React.FC<Props>= ({toDos, setToDos}: Props) => {
-
-  
-
-
-  return (
-    
+const ToDoList: React.FC<Props>= ({toDos, setToDos, completedToDos, setCompletedToDos}) => {
+  return (    
         <div className="container">
             <Droppable droppableId='ToDosList'>
                 {
                     (provided)=> (
-                        <div className="todos">
+                        <div 
+                        className="todos" 
+                        ref={provided.innerRef} 
+                        { ...provided.droppableProps}>
                         <span className="todos__heading">
                             Active Tasks
                         </span>
-                        {toDos.map((todo)=> (
+                        {toDos.map((todo, index)=> (
                             <SingleToDo
+                            index ={index}
                             key={todo.id}
                             todo={todo}
                             toDos={toDos}
-                            setToDos={setToDos}
-                            
+                            setToDos={setToDos}                            
                             />
-                        ))}
-        
+                        ))}        
                     </div>
-
-                    )
-                }
-           
+                    )}        
 
             </Droppable>
-            
-            <div className="todos remove">
-            <span className="todos__heading">
-                    Completed Tasks
-                </span>
-                {toDos.map((todo)=> (
-                    <SingleToDo
-                    key={todo.id}
-                    todo={todo}
-                    toDos={toDos}
-                    setToDos={setToDos}
-                    
-                    />
-                ))}
-
-                </div>
+            <Droppable droppableId='ToDosRemove'>
+                {
+                    (provided)=> (
+                        <div 
+                        className="todos remove"
+                        ref={provided.innerRef} 
+                        {...provided.droppableProps}>
+                        <span className="todos__heading">
+                                Completed Tasks
+                            </span>
+                            {toDos.map((todo, index)=> (
+                                <SingleToDo
+                                index={index}
+                                key={todo.id}
+                                todo={todo}
+                                toDos={completedToDos}
+                                setToDos={setCompletedToDos}                                
+                                />
+                            ))}            
+                            </div>
+                            )} 
+            </Droppable>         
+           
         </div>
       
     
