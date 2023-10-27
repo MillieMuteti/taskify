@@ -93,10 +93,7 @@ const SingleToDo = ({toDos, setToDos, todo, index}: Props) => {
         </div>
 
     </form>
-
-            )
-           }
-            
+            )}         
              
         </Draggable>
    
