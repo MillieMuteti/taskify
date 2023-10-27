@@ -9,7 +9,7 @@ const App: React.FC = () =>{
 const [toDo, setToDo] = useState<string> ("");
 const [toDos, setToDos] = useState<Todo[]> ([]);
 
-const [completedToDos, setcompletedToDos] = useState<Todo[]>([])
+const [completedToDos, setcompletedToDos] = useState<Todo[]>([]);
 
 const handleAdd = (e: React.FormEvent) => {
   e.preventDefault()
@@ -19,7 +19,6 @@ const handleAdd = (e: React.FormEvent) => {
   }
 };
 
-
 console.log(toDos);
 
   return (
@@ -27,20 +26,16 @@ console.log(toDos);
       <div className="App">
         <span className='header__text'>Taskify</span>
         <InputField toDo = {toDo} setToDo = {setToDo} handleAdd = {handleAdd}
-
         />
         <ToDoList
         toDos={toDos}
         setToDos={setToDos}
         completedToDos={completedToDos}
         setCompletedToDos={setcompletedToDos}
-          />
-        
+          />     
 
         </div>
-
     </DragDropContext>
-
   );
 }
 

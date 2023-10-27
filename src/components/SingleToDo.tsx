@@ -3,6 +3,7 @@ import { Todo } from './model';
 import {AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { MdOutlineDone } from 'react-icons/md';
 import "./style.css"
+import { Draggable } from 'react-beautiful-dnd';
 
 type Props ={
     todo:Todo,
@@ -37,18 +38,20 @@ const SingleToDo = ({toDos, setToDos, todo, index}: Props) => {
 
     }
     const inputRef = useRef<HTMLInputElement>(null)
-
     useEffect(() => {
-    inputRef.current?.focus();
-    
+    inputRef.current?.focus();    
     }, [edit])
     
-    
-
- 
-
-  return (
-    <form className='todos__single' onSubmit={(e)=> handleEdit(e, todo.id)}>
+    return (
+        <Draggable draggableId={todo.id.toString()} index={index}>
+           {
+            (provided) => (
+                <form 
+                className='todos__single' 
+                onSubmit={(e)=> handleEdit(e, todo.id)}
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}>
     { edit ? (
         <input
         value={editToDo}
@@ -90,6 +93,13 @@ const SingleToDo = ({toDos, setToDos, todo, index}: Props) => {
         </div>
 
     </form>
+
+            )
+           }
+            
+             
+        </Draggable>
+   
   )
 }
 

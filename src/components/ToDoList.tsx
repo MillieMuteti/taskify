@@ -11,7 +11,12 @@ interface Props{
     setCompletedToDos: React.Dispatch<React.SetStateAction<Todo[]>>
 }
 
-const ToDoList: React.FC<Props>= ({toDos, setToDos, completedToDos, setCompletedToDos}) => {
+const ToDoList: React.FC<Props>= ({
+    toDos, 
+    setToDos, 
+    completedToDos, 
+    setCompletedToDos,
+}) => {
   return (    
         <div className="container">
             <Droppable droppableId='ToDosList'>
@@ -20,7 +25,8 @@ const ToDoList: React.FC<Props>= ({toDos, setToDos, completedToDos, setCompleted
                         <div 
                         className="todos" 
                         ref={provided.innerRef} 
-                        { ...provided.droppableProps}>
+                        {...provided.droppableProps}>
+                    
                         <span className="todos__heading">
                             Active Tasks
                         </span>
@@ -37,7 +43,7 @@ const ToDoList: React.FC<Props>= ({toDos, setToDos, completedToDos, setCompleted
                     )}        
 
             </Droppable>
-            <Droppable droppableId='ToDosRemove'>
+            <Droppable droppableId='TodosRemove'>
                 {
                     (provided)=> (
                         <div 
@@ -55,16 +61,16 @@ const ToDoList: React.FC<Props>= ({toDos, setToDos, completedToDos, setCompleted
                                 toDos={completedToDos}
                                 setToDos={setCompletedToDos}                                
                                 />
-                            ))}            
+                            ))}   
+                            {/* {provided.placeholder}      */}
                             </div>
                             )} 
-            </Droppable>         
+            </Droppable>     
            
-        </div>
-      
+        </div>    
     
-  )
-}
+  );
+};
 
 export default ToDoList
 
