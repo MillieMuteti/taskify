@@ -62,6 +62,14 @@
   .remove {
     background-color: rgb(235, 103, 80);
   }
+
+  .drag-active {
+    background-color: rgb(0, 221, 236);
+  }
+  
+  .drag-complete {
+    background-color: rgb(255, 38, 0);
+  }
   
 
   .todos__heading {
