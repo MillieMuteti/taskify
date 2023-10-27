@@ -70,6 +70,9 @@
   .drag-complete {
     background-color: rgb(255, 38, 0);
   }
+  .drag {
+    box-shadow: 0 0 20px;
+  }
   
 
   .todos__heading {
